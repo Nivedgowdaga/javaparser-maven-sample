@@ -62,7 +62,7 @@ jobs:
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         username: ${{ secrets.DEPLOY_USER }}
-        #password: ${{ secrets.DEPLOY_PASSWORD }}  # Or use private-key for better security
+        password: ${{ secrets.DEPLOY_PASSWORD }}  # Or use private-key for better security
         port: 22
         script: |
           # Transfer the JAR file to the remote server

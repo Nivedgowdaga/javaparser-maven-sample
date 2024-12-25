@@ -64,7 +64,7 @@ jobs:
         username: ${{ secrets.DEPLOY_USER }}
         password: ${{ secrets.DEPLOY_PASSWORD }}  # Or use private-key for better security
         port: 22
-        timeout: 60s
+        timeout: 1h
         script: |
           # Transfer the JAR file to the remote server
           scp java-app.jar ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/path/to/deploy/

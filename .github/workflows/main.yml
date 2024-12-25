@@ -45,28 +45,28 @@ jobs:
         name: java-app
         path: target/*.jar  # Adjust the path if needed
 
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #   # Step 1: Download build artifact
-  #   - name: Download JAR artifact
-  #     uses: actions/download-artifact@v3
-  #     with:
-  #       name: java-app
+    steps:
+    # Step 1: Download build artifact
+    - name: Download JAR artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: java-app
 
-  #   # Step 2: Deploy to remote server
-  #   - name: Deploy to Server
-  #     uses: appleboy/ssh-action@v0.1.7
-  #     with:
-  #       host: ${{ secrets.DEPLOY_HOST }}
-  #       username: ${{ secrets.DEPLOY_USER }}
-  #       password: ${{ secrets.DEPLOY_PASSWORD }}  # Or use private-key for better security
-  #       port: 22
-  #       script: |
-  #         # Transfer the JAR file to the remote server
-  #         scp java-app.jar ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/path/to/deploy/
+    # Step 2: Deploy to remote server
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        #password: ${{ secrets.DEPLOY_PASSWORD }}  # Or use private-key for better security
+        port: 22
+        script: |
+          # Transfer the JAR file to the remote server
+          scp java-app.jar ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/path/to/deploy/
 
-  #         # Restart the application or service
-  #         ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "sudo systemctl restart my-java-app"
+          # Restart the application or service
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "sudo systemctl restart my-java-app"
